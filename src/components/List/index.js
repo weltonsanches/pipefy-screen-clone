@@ -4,23 +4,20 @@ import { MdAdd } from 'react-icons/md';
 import Card from '../Card';
 import { Container } from './styles';
 
-const List = () => {
+const List = ({ data }) => {
   return (
-    <Container>
+    <Container done={data.done} >
       <header>
-        <h2>Tarefas</h2>
+        <h2>{data.title}</h2>
 
-        <button type="button">
+        {data.creatable && (<button type="button">
           <MdAdd size={24} color='#fff' />
-        </button>
+        </button>)}
+
       </header>
 
       <ul>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        { data.cards.map(card => <Card key={card.id} data={card} />) }
       </ul>
     </Container>
   );
