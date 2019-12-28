@@ -19,10 +19,11 @@ const Card = ({ data, index, listIndex }) => {
     accept: 'CARD',
     hover(item, monitor){
       const draggedIndex = item.index;
-      const targetIndex = index;
       const draggedListIndex = item.listIndex;
+      const targetIndex = index;
+      const targetListIndex = listIndex;
 
-      if(draggedIndex === targetIndex)
+      if(draggedIndex === targetIndex && draggedListIndex === targetListIndex)
         return;
 
       const targetSize = ref.current.getBoundingClientRect();
@@ -36,9 +37,10 @@ const Card = ({ data, index, listIndex }) => {
       if(draggedIndex > targetIndex && draggedTop > targetCenter)
         return;
 
-      move(draggedListIndex, draggedIndex, targetIndex);
+      move(draggedListIndex, targetListIndex, draggedIndex, targetIndex);
 
       item.index = targetIndex;
+      item.listIndex = targetListIndex;
     }
   });
 
